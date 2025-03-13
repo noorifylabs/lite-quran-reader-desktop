@@ -1,0 +1,1 @@
+# lite-quran-reader-desktop
