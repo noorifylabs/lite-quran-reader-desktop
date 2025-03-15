@@ -1,34 +1,67 @@
-import React, { useState } from 'react';
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import React, { useEffect, useState } from 'react';
+import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses } from 'react-pro-sidebar';
 import './SidebarNav.css';
-import { Home } from '@mui/icons-material';
+import { Close, Home } from '@mui/icons-material';
+import { getChapters } from '../../services/chapterSerivce';
+import { Chapter } from '../../models/chapter';
+import { useNavigate } from 'react-router-dom';
 
-const chapters = [
-  { id: 1, title: 'Chapter 1', content: 'Content of Chapter 1' },
-  { id: 2, title: 'Chapter 2', content: 'Content of Chapter 2' },
-  { id: 3, title: 'Chapter 3', content: 'Content of Chapter 3' },
-  // Add more chapters as needed
-];
 
-function SidebarNav({ onSelectChapter }: { onSelectChapter: (content: string) => void }) {
+
+
+function SidebarNav({ onSelectChapter }: { onSelectChapter: (content: number) => void }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [chapters, setChapters] = useState<Chapter[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const navigate = useNavigate();
 
   const handleToggleSidebar = () => {
     setCollapsed(!collapsed);
   };
 
+  const filteredChapters = chapters.filter(chapter =>
+    chapter.name_simple.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  useEffect(() => {
+    const fetchChapters = async () => {
+      const data = await getChapters();
+      setChapters(data.chapters);
+    };
+
+    fetchChapters();
+  }, []);
+
+  const handleChapterSelect = (chapterId: number) => {
+    navigate(`/chapter/${chapterId}`);
+  };
+
+
   return (
     <div className="sidebar-container">
-    <Sidebar collapsed={collapsed}>
+      <Sidebar   rootStyles={{
+    [`.${sidebarClasses.container}`]: {
+      backgroundColor: 'black',
+    },
+  }}
+>
       <Menu>
-        <MenuItem icon={<Home />}></MenuItem>
-        {chapters.map((chapter) => (
-            <MenuItem key={chapter.id} onClick={() => onSelectChapter(chapter.content)}>
-              {chapter.title}
+      <MenuItem onClick={handleToggleSidebar} icon={<Close />}></MenuItem>
+          <MenuItem>
+            <input
+              type="text"
+              placeholder="Search chapters"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ width: '100%', padding: '5px' }}
+            />
+          </MenuItem>        {filteredChapters.map((chapter) => (
+            <MenuItem key={chapter.id} onClick={() => handleChapterSelect(chapter.id)}>
+              {chapter.id} {chapter.name_complex}
             </MenuItem>
           ))}
       </Menu>
-      <button onClick={handleToggleSidebar}>Toggle Sidebar</button>
     </Sidebar>
     </div>
   );

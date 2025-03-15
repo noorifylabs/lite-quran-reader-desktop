@@ -3,6 +3,7 @@
 .sidebar {
   background-color: #333;
   color: #fff;
+  overflow-y: scroll;
 }
 
 .sidebar .menu-item {
@@ -11,4 +12,9 @@
 
 .sidebar .menu-item .icon {
   color: #f0f0f0;
+}
+
+.sidebar-container {
+  height: 100vh;
+  overflow-y: auto;
 }

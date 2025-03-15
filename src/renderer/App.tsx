@@ -1,28 +1,26 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import { MemoryRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import { useState } from 'react';
 import SidebarNav from './components/SidebarNav';
 import MainPage from './components/MainPage';
+import ChapterPage from './components/ChapterPage';
 
-
-function ChapterContent({ content }: { content: string }) {
-  return <div className="chapter-content">{content}</div>;
-}
 
 export default function App() {
-  const [selectedContent, setSelectedContent] = useState('');
+  const [selectedChapter, setSelectedChapter] = useState(0);
 
   return (
     <div className="app-container">
-      <SidebarNav onSelectChapter={setSelectedContent} />
+              <Router>
+
+            <SidebarNav onSelectChapter={setSelectedChapter} />
       <div className="content">
-        <Router>
           <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/chapter" element={<ChapterContent content={selectedContent} />} />
+          <Route path="/chapter/:chapterId" element={<ChapterPage />} />
           </Routes>
-        </Router>
       </div>
+      </Router>
     </div>
   );
 }
