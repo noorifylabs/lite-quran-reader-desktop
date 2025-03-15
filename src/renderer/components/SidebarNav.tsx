@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function SidebarNav({ onSelectChapter }: { onSelectChapter: (content: number) => void }) {
+function SidebarNav({  }: { }) {
   const [collapsed, setCollapsed] = useState(false);
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
