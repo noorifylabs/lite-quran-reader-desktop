@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses } from 'react-pro-sidebar';
 import './SidebarNav.css';
-import { Close, Home } from '@mui/icons-material';
+import { Close } from '@mui/icons-material';
 import { getChapters } from '../../services/chapterSerivce';
 import { Chapter } from '../../models/chapter';
 import { useNavigate } from 'react-router-dom';

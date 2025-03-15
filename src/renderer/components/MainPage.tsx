@@ -1,40 +1,52 @@
-import React from 'react';
-import icon from '../../../assets/icon.svg';
+import React, { useEffect, useState } from 'react';
+import juzLeft from '../../../assets/juz-art-left.svg';
+import juzRight from '../../../assets/juz-art-right.svg';
 import './MainPage.css';
+import { Juz } from '../../models/juz';
+import { getJuzs } from '../../services/juzService';
 
 const MainPage: React.FC = () => {
+  function combineJuzs(juzs: Juz[]): { [key: number]: string[] } {
+    const combinedJuzs: { [key: number]: string[] } = {};
+
+    juzs.forEach(juz => {
+        if (!combinedJuzs[juz.juz_number]) {
+            combinedJuzs[juz.juz_number] = [];
+        }
+        combinedJuzs[juz.juz_number].push(...Object.keys(juz.verse_mapping));
+    });
+
+    // Remove duplicates
+    for (const juzNumber in combinedJuzs) {
+      combinedJuzs[juzNumber] = Array.from(new Set(combinedJuzs[juzNumber]));
+    }
+
+    return combinedJuzs;
+  }
+  const [combinedJuzs, setCombinedJuzs] = useState<{ [key: number]: string[] }>({});
+
+  useEffect(() => {
+    const fetchJuzs = async () => {
+      const data = await getJuzs();
+      const combined = combineJuzs(data.juzs);
+      setCombinedJuzs(combined);
+    };
+
+    fetchJuzs();
+  }, []);
+
   return (
-    <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react2-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="folded hands">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
+    <div className="juz-container">
+      {Object.entries(combinedJuzs).map(([juzNumber, verseKeys]) => (
+        <div key={juzNumber} className="juz-item">
+          <h2>Juz {juzNumber}</h2>
+          <ul>
+            {verseKeys.map((key, index) => (
+              <li key={index}>{key}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 };
