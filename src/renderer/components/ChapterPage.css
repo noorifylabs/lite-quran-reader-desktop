@@ -1,0 +1,41 @@
+.TranslationView_container {
+    width: 100%; /* Take the full width of the screen */
+    padding: 20px;
+    background-color: #1e1e2f; /* Dark background */
+    color: #ffffff; /* Light text */
+    box-sizing: border-box; /* Include padding in the width */
+  }
+  
+  .verses-container {
+    margin-top: 20px;
+    width: 100%; /* Ensure the verses container also takes full width */
+  }
+  
+  .ChapterHeader_container {
+    width: 100%; /* Ensure the header takes full width */
+    margin-bottom: 20px;
+  }
+  
+  .TranslationViewCell_cellContainer {
+    width: 100%; /* Ensure each verse container takes full width */
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #3a3a4b; /* Divider between verses */
+  }
+  
+  .TranslationViewCell_arabicVerseContainer {
+    text-align: right; /* Align Arabic text to the right */
+  }
+  
+  .VerseText_verseText {
+    font-size: 20px;
+    line-height: 1.8;
+    font-family: 'UthmanicHafs1-Ver17', serif; /* Use a custom Arabic font if available */
+    color: #ffffff;
+  }
+  
+  .Separator_base {
+    height: 1px;
+    background-color: #3a3a4b;
+    margin-top: 10px;
+  }

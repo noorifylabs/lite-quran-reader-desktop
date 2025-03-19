@@ -470,3 +470,25 @@ a:hover {
 .icon-surah114:before {
   content: "\E972";
 }
+
+
+@font-face {
+  font-family: "pdms";
+  src: local("_PDMS_Saleem_QuranFont Regular"),
+  url("../../assets/fonts/quran_fonts/pdms/pdms-saleem-quranfont.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "me_quran";
+  src: url("../../assets/fonts/quran_fonts/me_quran/me_quran.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "UthmanicHafs1-Ver17";
+  src: local('KFGQPC HAFS Uthmanic Script Regular. Version 0.17'),
+  url("../../assets/fonts/quran_fonts/uthmanic_hafs/UthmanicHafs1-Ver17.woff2"),
+  url("../../assets/fonts/quran_fonts/uthmanic_hafs/UthmanicHafs1-Ver17.ttf") format('truetype');
+  font-display: swap;
+}
