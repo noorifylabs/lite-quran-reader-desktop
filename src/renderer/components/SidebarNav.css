@@ -1,20 +1,59 @@
-/* styles.css */
-
-.sidebar {
-  background-color: #333;
-  color: #fff;
-  overflow-y: scroll;
-}
-
-.sidebar .menu-item {
-  font-size: 18px;
-}
-
-.sidebar .menu-item .icon {
-  color: #f0f0f0;
-}
-
 .sidebar-container {
+  display: flex;
   height: 100vh;
-  overflow-y: auto;
+  background-color: #1e1e2f; /* Dark background */
 }
+
+.sidebar-container .ps-sidebar-container {
+  background-color: #1e1e2f; /* Match MainPage background */
+  color: #ffffff; /* Light text */
+  border-right: 1px solid #2a2a3b; /* Dark border */
+}
+
+.sidebar-container input[type="text"] {
+  background-color: #2a2a3b; /* Darker background for input */
+  border: 1px solid #3a3a4b; /* Darker border */
+  color: #ffffff; /* Light text */
+  border-radius: 4px;
+  width: 100%;
+}
+
+
+.sidebar-container input[type="text"]::placeholder {
+  color: #b0b0c0; /* Light gray placeholder text */
+}
+
+.sidebar-container .ps-menuitem-root {
+  background-color: #2a2a3b; /* Darker background for menu items */
+  color: #ffffff; /* Light text */
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-container .ps-menuitem-root:hover {
+  background-color: #3a3a4b; /* Slightly lighter background on hover */
+  color: #80d8ff; /* Brighter text on hover */
+}
+
+.sidebar-container .ps-menuitem-root.active {
+  background-color: #4cafef; /* Highlight active menu item */
+  color: #ffffff; /* Light text for active item */
+}
+
+.sidebar-container .ps-menuitem-root .ps-menuitem-icon {
+  color: #ffffff; /* Light icon color */
+}
+
+.sidebar-container .ps-menuitem-root .ps-menuitem-icon:hover {
+  color: #80d8ff; /* Brighter icon color on hover */
+}
+
+.sidebar-container .ps-menuitem-root .ps-menuitem-label {
+  font-size: 16px; /* Match font size with MainPage */
+  font-weight: 600;
+}
+
+.sidebar-container .ps-menuitem-root .ps-menuitem-label:hover {
+  color: #80d8ff; /* Brighter text on hover */
+}
+

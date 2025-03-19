@@ -1,3 +1,136 @@
+
 .juz-container {
-    display: flex;
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for responsiveness */
+  gap: 16px; /* Add spacing between cards */
+  justify-content: center; /* Center the cards */
+}
+
+.juz-card {
+  background-color: #1e1e2f; /* Dark background */
+  border: 1px solid #2a2a3b; /* Dark border */
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%; /* Default width */
+/*  max-width: 300px; /* Limit the card width */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Darker shadow */
+  transition: box-shadow 0.3s ease;
+}
+
+.juz-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7); /* Darker hover shadow */
+}
+
+.juz-card__title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: left;
+  color: #ffffff; /* Light text */
+}
+
+.juz-card__title a {
+  text-decoration: none;
+  color: #4cafef; /* Light blue for links */
+}
+
+.juz-card__title a:hover {
+  color: #80d8ff; /* Brighter blue on hover */
+}
+
+.surah-card {
+  background-color: #2a2a3b; /* Darker background */
+  border: 1px solid #3a3a4b; /* Darker border */
+  border-radius: 6px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px; /* Add spacing between surah cards */
+  transition: box-shadow 0.3s ease;
+}
+
+.surah-card:hover {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.6); /* Darker hover shadow */
+}
+
+.surah-card__text {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.surah-card__latin h5 {
+  color: #ffffff; /* Light text */
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.surah-card__latin p {
+  color: #b0b0c0; /* Light gray text */
+  font-size: 14px;
+  margin: 0;
+}
+
+.surah-card__latin .ayah-number-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.surah-card__latin .ayah-number {
+  background-color: #3a3a4b; /* Darker background */
+  color: #ffffff; /* Light text */
+  border-radius: 12px;
+  height: 24px;
+  padding: 2px 8px;
+  margin-right: 8px;
+}
+
+.surah-card__arabic {
+  display: flex;
+  align-items: center;
+}
+
+.surah-card__arabic p {
+  margin: 0;
+  padding: 0;
+  color: #ffffff; /* Light text */
+}
+
+.icon-surah {
+  font-size: 25px; /* Adjust font size as needed */
+  color: #ffffff; /* Light text color */
+}
+
+.surah-section {
+  display: grid;
+  column-gap: 12px;
+  row-gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .surah-section {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
+
+@media (max-width: 576px) {
+  .surah-section {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.surah-card__arabic {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start; /* Align items to the left */
+}
+
+.verses-count {
+  margin-top: 4px; /* Add spacing above the line */
+  color: #ffffff; /* Light text color */
+  font-size: 14px; /* Adjust font size */
+}
+
