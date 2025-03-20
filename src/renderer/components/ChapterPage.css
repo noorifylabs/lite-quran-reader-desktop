@@ -1,41 +1,268 @@
+/* Ensure the body or root container doesn't allow horizontal scrolling */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure the main container spans the full width */
 .TranslationView_container {
-    width: 100%; /* Take the full width of the screen */
-    padding: 20px;
-    background-color: #1e1e2f; /* Dark background */
-    color: #ffffff; /* Light text */
-    box-sizing: border-box; /* Include padding in the width */
-  }
-  
-  .verses-container {
-    margin-top: 20px;
-    width: 100%; /* Ensure the verses container also takes full width */
-  }
-  
-  .ChapterHeader_container {
-    width: 100%; /* Ensure the header takes full width */
-    margin-bottom: 20px;
-  }
-  
-  .TranslationViewCell_cellContainer {
-    width: 100%; /* Ensure each verse container takes full width */
-    margin-bottom: 15px;
-    padding: 10px;
-    border-bottom: 1px solid #3a3a4b; /* Divider between verses */
-  }
-  
+  width: 100%; /* Use viewport width to ensure it spans the screen */
+  padding: 20px;
+  background-color: #1e1e2f;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* Ensure child elements don't exceed the container width */
+.verses-container,
+.ChapterHeader_container,
+.TranslationViewCell_cellContainer {
+  max-width: 100%; /* Prevent elements from exceeding the container width */
+  box-sizing: border-box; /* Include padding in width calculations */
+}
   .TranslationViewCell_arabicVerseContainer {
     text-align: right; /* Align Arabic text to the right */
   }
-  
+
+  .bismillah-svg {
+    width: 100%; /* Adjust width as needed */
+    max-width: 400px; /* Optional: Limit the maximum width */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the SVG */
+    fill: #ffffff; /* Set the color of the SVG to white */
+  }
+
   .VerseText_verseText {
-    font-size: 20px;
+    font-size: 50px;
     line-height: 1.8;
     font-family: 'UthmanicHafs1-Ver17', serif; /* Use a custom Arabic font if available */
     color: #ffffff;
   }
-  
+
   .Separator_base {
     height: 1px;
     background-color: #3a3a4b;
     margin-top: 10px;
   }
+
+
+  .ChapterHeader_chapterIconContainer {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center; /* Ensure text is centered */
+    margin: 20px 0; /* Optional: Add some spacing */
+}
+
+.ChapterIconContainer_iconContainer {
+    display: inline-block; /* Ensure it behaves like a block for centering */
+}
+
+@font-face {
+  font-family: 'p1-v1';
+  src: local('QCF_P001'),
+       url('../../../assets/fonts/quran_fonts/v1/woff2/p1.woff2') format('woff2'),
+       url('../../../assets/fonts/quran_fonts/v1/woff/p1.woff') format('woff'),
+       url('../../../assets/fonts/quran_fonts/v1/ttf/p1.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'p1-v2';
+  src: local('QCF2001'),
+       url('../../../assets/fonts/quran_fonts/v2/woff2/p1.woff2') format('woff2'),
+       url('../../../assets/fonts/quran_fonts/v2/woff/p1.woff') format('woff');
+  font-display: swap;
+}
+
+.p1-v1 {
+  font-family: 'p1-v1';
+}
+
+.p1-v2 {
+  font-family: 'p1-v2';
+}
+
+
+tajweed {
+  cursor: pointer;
+
+  &.ham_wasl,
+  &.slnt,
+  &.laam_shamsiyah {
+    color: #aaaaaa;
+
+    &:hover {
+      background-color: #d7d7d7;
+    }
+  }
+
+  &.madda_normal {
+    color: #537fff;
+  }
+
+  &.madda_permissible {
+    color: #4050ff;
+  }
+
+  &.madda_necessary {
+    color: #000ebc;
+  }
+
+  &.madda_obligatory {
+    color: #2144c1;
+  }
+
+  &.qalaqah {
+    color: #dd0008;
+
+    &:hover {
+      background-color: #f3a6a9;
+      color: #dd0008;
+    }
+  }
+
+  &.ikhafa_shafawi {
+    color: #d500b7;
+
+    &:hover {
+      background-color: #f0a6e6;
+      color: #d500b7;
+    }
+  }
+
+  &.ikhafa {
+    color: #9400a8;
+
+    &:hover {
+      background-color: #daa6e1;
+      color: #9400a8;
+    }
+  }
+
+  &.iqlab {
+    color: #26bffd;
+
+    &:hover {
+      background-color: #92e5ff;
+      color: #0099c5;
+    }
+  }
+
+  &.idgham_shafawi {
+    color: #58b800;
+
+    &:hover {
+      background-color: #bae890;
+      color: #58b800;
+    }
+  }
+
+  &.idgham_ghunnah {
+    color: #169200;
+
+    &:hover {
+      background-color: #9ce58e;
+      color: #169200;
+    }
+  }
+
+  &.idgham_wo_ghunnah {
+    color: #169200;
+
+    &:hover {
+      background-color: #9ce58e;
+      color: #169200;
+    }
+  }
+
+  &.idgham_mutajanisayn,
+  &.idgham_mutaqaribayn {
+    color: #a1a1a1;
+
+    &:hover {
+      background-color: #d7d7d7;
+    }
+  }
+
+  &.ghunnah {
+    color: #ff7e1e;
+
+    &:hover {
+      background-color: #ff7e1e;
+      color: black;
+    }
+  }
+}
+
+.uighur,
+.uyghur,
+.ur,
+.urdu,
+.persian,
+.hebrew,
+.pashto,
+.arabic,
+divehi,
+.dhivehi {
+  direction: rtl;
+  text-align: right;
+
+  .alert-dismissible {
+    .close {
+      left: 0;
+      right: auto;
+    }
+  }
+}
+
+.ur,
+.urdu {
+  font-family: nafees;
+}
+
+.kurdish {
+  font-family: "DroidArabicNaskh";
+}
+
+.divehi,
+.dhivehi,
+.maldivian {
+  font-family: "divehi";
+}
+
+.indopak,
+.text_indopak {
+  font-family: "pdms";
+}
+
+.tajweed,
+.uthmani {
+  font-family: me_quran;
+}
+
+.muhsaf-qpc_hafs,
+.qpc_hafs {
+  font-family: UthmanicHafs1-Ver17;
+  * {
+    unicode-bidi: bidi-override;
+  }
+}
+
+.lang-ar,
+.lang-ur {
+  input {
+    direction: rtl;
+  }
+}
+
+.indopak,
+.uthmani,
+.tajweed {
+  .end {
+    font-family: UthmanicHafs1-Ver17;
+    font-size: 35px;
+    unicode-bidi: bidi-override;
+  }
+}

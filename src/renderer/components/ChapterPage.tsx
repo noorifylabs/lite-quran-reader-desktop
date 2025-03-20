@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ChapterPage.css';
-import { VerseUthamni, VerseUthamniAdvanced } from '../../models/verse';
-import { getUthamni } from '../../services/versesService';
+import { VerseUthamniTajweed } from '../../models/verse';
+import BismillahSVG from '../../../assets/images/bismillah.svg';
+import { getUthamniTajweed } from '../../services/versesService';
+import DOMPurify from 'dompurify'; // Install this library if not already installed
 
 const ChapterPage = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
-  const [verses, setVerses] = useState<VerseUthamniAdvanced[]>([]);
+  const [verses, setVerses] = useState<VerseUthamniTajweed[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
 
   useEffect(() => {
     const fetchVerses = async () => {
       try {
         if (chapterId) {
-          const response = await getUthamni(parseInt(chapterId));
+          const response = await getUthamniTajweed(parseInt(chapterId));
           setVerses(response.verses);
         }
       } catch (err) {
@@ -52,7 +55,7 @@ const ChapterPage = () => {
             </div>
           </div>
           <div className="ChapterHeader_bismillahContainer">
-            <p className="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+          <img src={BismillahSVG} alt="Bismillah" className="bismillah-svg" />
           </div>
         </div>
         <div className="verses-container">
@@ -69,7 +72,12 @@ const ChapterPage = () => {
               </div>
               <div className="TranslationViewCell_contentContainer">
                 <div className="TranslationViewCell_arabicVerseContainer">
-                  <h1 className="VerseText_verseText">{verse.text_uthmani}</h1>
+                <div
+                    className="arabic tajweed"
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(verse.text_uthmani_tajweed),
+                    }}
+                  ></div>
                 </div>
               </div>
               <div className="Separator_base"></div>
