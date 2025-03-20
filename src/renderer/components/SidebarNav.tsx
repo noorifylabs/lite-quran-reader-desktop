@@ -33,8 +33,8 @@ function SidebarNav({  }: { }) {
     fetchChapters();
   }, []);
 
-  const handleChapterSelect = (chapterId: number) => {
-    navigate(`/chapter/${chapterId}`);
+  const handleChapterSelect = (chapterId: number, preBismillah: boolean) => {
+    navigate(`/chapter/${chapterId}/${preBismillah}`);
   };
 
 
@@ -57,7 +57,7 @@ function SidebarNav({  }: { }) {
               style={{ width: '100%', padding: '5px' }}
             />
           </MenuItem>        {filteredChapters.map((chapter) => (
-            <MenuItem key={chapter.id} onClick={() => handleChapterSelect(chapter.id)}>
+            <MenuItem key={chapter.id} onClick={() => handleChapterSelect(chapter.id, chapter.bismillah_pre)}>
               {chapter.id} {chapter.name_complex}
             </MenuItem>
           ))}

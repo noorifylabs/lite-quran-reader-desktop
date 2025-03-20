@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ChapterPage.css';
 import { VerseUthamniTajweed } from '../../models/verse';
-import BismillahSVG from '../../../assets/images/bismillah.svg';
+import { ReactComponent as BismillahSVG } from  '../../../assets/images/bismillah.svg';
 import { getUthamniTajweed } from '../../services/versesService';
-import DOMPurify from 'dompurify'; // Install this library if not already installed
+import DOMPurify from 'dompurify';
 
 const ChapterPage = () => {
-  const { chapterId } = useParams<{ chapterId: string }>();
+  const { chapterId, preBismillah } = useParams<{ chapterId: string, preBismillah: string }>();
   const [verses, setVerses] = useState<VerseUthamniTajweed[]>([]);
+  const isPreBismillah = preBismillah === 'true';
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -55,7 +56,7 @@ const ChapterPage = () => {
             </div>
           </div>
           <div className="ChapterHeader_bismillahContainer">
-          <img src={BismillahSVG} alt="Bismillah" className="bismillah-svg" />
+          {isPreBismillah && <BismillahSVG className="bismillah-svg" />}
           </div>
         </div>
         <div className="verses-container">
@@ -64,22 +65,18 @@ const ChapterPage = () => {
               <div className="TranslationViewCell_actionContainer">
                 <div className="TranslationViewCell_actionContainerLeft">
                   <div className="TranslationViewCell_actionItem">
-                    <a href={`/${chapterId}?startingVerse=${verse.verse_key}`} className="VerseLink_verseLink">
+                    <a className="VerseLink_verseLink">
                       {verse.verse_key}
                     </a>
                   </div>
                 </div>
               </div>
-              <div className="TranslationViewCell_contentContainer">
-                <div className="TranslationViewCell_arabicVerseContainer">
                 <div
                     className="arabic tajweed"
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(verse.text_uthmani_tajweed),
                     }}
                   ></div>
-                </div>
-              </div>
               <div className="Separator_base"></div>
             </div>
           ))}

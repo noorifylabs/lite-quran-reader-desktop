@@ -15,7 +15,7 @@ export default function App() {
       <div className="content">
           <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/chapter/:chapterId" element={<ChapterPage />} />
+          <Route path="/chapter/:chapterId/:preBismillah" element={<ChapterPage />} />
           </Routes>
       </div>
       </Router>
